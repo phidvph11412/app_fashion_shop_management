@@ -17,6 +17,9 @@ public class ItemAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         System.out.println(action);
+        if (action == null){
+            action = "";
+        }
         switch (action) {
             case "delete":
                 deleteItem(request, response);
@@ -27,7 +30,12 @@ public class ItemAdminServlet extends HttpServlet {
             case "add":
                 addItem(request, response);
                 break;
+            default: showListItem(request, response);
         }
+    }
+
+    private void showListItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
     }
 
     private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

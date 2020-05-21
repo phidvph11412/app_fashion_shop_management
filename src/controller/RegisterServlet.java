@@ -100,7 +100,7 @@ public class RegisterServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Customer> customerList = customerService.selectAllCustomer();
         request.setAttribute("customerList", customerList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/admin/listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 

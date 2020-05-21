@@ -33,6 +33,7 @@
                             <a class="nav-link" href="/index.jsp">SINGOUT <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
+                    <span>${admin}</span>
                 </div>
             </nav>
             <span>${message}</span>
@@ -41,10 +42,10 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/index.jsp">LIST ITEM <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/jsp/admin/item.jsp">LIST ITEM <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/index.jsp">LIST CUSTOMER <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/Customers">LIST CUSTOMER <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/index.jsp">LIST ORDER <span class="sr-only">(current)</span></a>
