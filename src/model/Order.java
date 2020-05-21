@@ -8,19 +8,12 @@ public class Order {
     private ArrayList<Item> listItem = new ArrayList<>();
     private boolean status;
     private int amount;
+    private String itemId;
 
     public Order(int orderID, String customerName, ArrayList<Item> listItem) {
         this.orderID = orderID;
         this.customerName = customerName;
         this.listItem = listItem;
-    }
-
-    public Order(int orderID, String customerName, ArrayList<Item> listItem, boolean status, int amount) {
-        this.orderID = orderID;
-        this.customerName = customerName;
-        this.listItem = listItem;
-        this.status = status;
-        this.amount = amount;
     }
 
     public boolean isStatus() {
@@ -37,6 +30,27 @@ public class Order {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public Order(String customerName,  int amount,boolean status) {
+        this.customerName = customerName;
+        this.amount = amount;
+        this.status = status;
+    }
+
+    public Order(String customerName, String itemId, int amount, boolean status) {
+        this.customerName = customerName;
+        this.itemId = itemId;
+        this.amount = amount;
+        this.status = status;
     }
 
     public int getOrderID() {

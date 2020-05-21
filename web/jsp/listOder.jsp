@@ -53,10 +53,6 @@
                             <a class="nav-link" href="/index.jsp">LIST ORDER <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
                 </nav>
             </div>
         </header>
@@ -67,34 +63,30 @@
             </form>
         </nav>
         <div class="container text-left">
-            <a href="/Customers?action=showRegister" class="btn btn-success">Add New Customer</a>
+            <a href="/Customers?action=showRegister" class="btn btn-success">Add New Oder</a>
         </div>
         <br>
         <table class="table table-success table-hover">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Password</th>
-                <th>rePassword</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Address</th>
+                <th>CustomerName</th>
+                <th>ItemID</th>
+                <th>Amount</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="customer" items="${customerList}">
+            <c:forEach var="oder" items="${orderList}">
                 <tr>
-                    <td><c:out value="${customer.getCustomerName()}"/></td>
-                    <td><c:out value="${customer.getCustomerPassword()}"/></td>
-                    <td><c:out value="${customer.getCustomerPassword()}"/></td>
-                    <td><c:out value="${customer.getCustomerPhoneNumber()}"/></td>
-                    <td><c:out value="${customer.getCustomerEmail()}"/></td>
-                    <td><c:out value="${customer.getCustomerAddress()}"/></td>
+                    <td><c:out value="${oder.getCustomerName()}"/></td>
+                    <td><c:out value="${oder.getItemId()}"/></td>
+                    <td><c:out value="${oder.getAmount()}"/></td>
+                    <td><c:out value="${oder.isStatus()}"/></td>
                     <td>
-                        <a href="/Customers?action=edit&name=${customer.customerName}"> Edit</a>
+                        <a href="/order-update?action=edit&name=${oder.customerName}&item=${oder.itemId}"> Edit</a>
                         <br>
-                        <a href="/Customers?action=delete&name=${customer.customerName}"> Delete </a>
+                        <a href="/order-update?action=delete&name=${oder.customerName}"> Delete </a>
                     </td>
                 </tr>
             </c:forEach>
