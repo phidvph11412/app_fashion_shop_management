@@ -50,7 +50,7 @@
                             <a class="nav-link" href="/Customers">LIST CUSTOMER <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/index.jsp">LIST ORDER <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/order-update">LIST ORDER <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">

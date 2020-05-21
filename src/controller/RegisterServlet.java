@@ -73,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
             case "create":
                 showCustomer(request, response);
                 break;
-            case "editCustomer":
+            case "edit":
                 showEditCustomer(request, response);
                 break;
             case "delete":
