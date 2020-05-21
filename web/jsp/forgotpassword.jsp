@@ -36,24 +36,23 @@
         </div>
     </header>
     <main class="content row">
-        <form action="/login" method="post" class="form-group form" style="height: 430px">
-            <h2 class="text-primary ">Login</h2>
+        <form action="/forgotPassword" method="post" class="form-group form" style="height: 430px">
+            <h2 class="text-primary ">FORGOT PASSWORD</h2>
             <div class="form-group input-form ">
                 <label>User Name :</label>
                 <input type="text" name="name" class="form-control ">
             </div>
             <div class="form-group input-form ">
-                <label>Password :</label>
-                <input type="password" name="pass" class="form-control ">
+                <label>Email :</label>
+                <input type="email" name="email" class="form-control ">
             </div>
 
             <button class="btn btn-primary btn-form-submit "
-                    type="submit" name="action" value="login">LOGIN
+                    type="submit">FORGOT PASSWORD
             </button>
-          <div class="form-group input-form ">
-              <a class="nav-link active" href="/jsp/forgotpassword.jsp">forgot password</a>
-          </div>
+            <p><span>${message}</span></p>
         </form>
+
     </main>
 
     <div class="contact " id="footer-contact">

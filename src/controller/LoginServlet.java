@@ -21,6 +21,15 @@ public class LoginServlet extends HttpServlet {
     String password = "password";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        switch (action){
+            case "login" : login(request, response);
+            break;
+        }
+
+    }
+
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Customer> customerList = customerService.getListUserAndPass();
         String name = request.getParameter("name");
         String pass = request.getParameter("pass");

@@ -16,6 +16,7 @@ public class CustomerService implements ICustomerService {
     private static final String SELECT_CUSTOMER_NAME = "select customerName,customerPass,Phone,Email,Address from customer where customerName = ? ;";
     private static final String UPDATE_CUSTOMER_NAME = "update customer set customerPass = ?,Phone = ?,Email = ? ,Address = ? where customerName = ?";
     private static final String SELECT_NAME_PASS = "select customerName,customerPass from customer";
+    private static final String SELECT_PASS = "select customerPass from customer where customerName = ? and  Email = ?";
 
     public CustomerService() {
 
@@ -157,6 +158,22 @@ public class CustomerService implements ICustomerService {
             throwables.printStackTrace();
         }
         return customers;
+    }
+
+    @Override
+    public String getPasswordByNameAndEmail(String customerName, String Email) {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PASS);
+            preparedStatement.setString(1,customerName);
+            preparedStatement.setString(2,Email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getString(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     private void printSQLException(SQLException ex) {
