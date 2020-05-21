@@ -22,7 +22,7 @@
             <h1><a href="../index.jsp">LOGO</a></h1>
         </div>
         <div class="col-xl-4"><span class="user-name"
-                                    style="line-height: 90px;color: #eb6d6c">${message}${userName}</span></div>
+                                    style="line-height: 90px;color: #eb6d6c">${name}</span></div>
         <div class="col-xl-4 menu">
             <ul>
                 <li class="border-bottom-red"><a href="../index.jsp">HOME</a></li>
@@ -68,7 +68,7 @@
             <form action="/buy" method="post">
                 <table>
                     <tr>
-                        <td colspan="4">Name : ${userName} </td>
+                        <td colspan="4">Name : ${name} </td>
                     </tr>
                 </table>
                 <table class="table table-borderless">
@@ -99,13 +99,13 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <button name="action" value="buy">BUY</button>
+                            <button type="submit" name="action" value="buy">BUY</button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </form>
-
+            <span>${message}</span>
         </div>
     </div>
 
