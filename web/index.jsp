@@ -36,7 +36,7 @@
             <h1><a href="index.jsp">LOGO</a></h1>
         </div>
         <div class="col-xl-4"><span class="user-name"
-                                    style="line-height: 90px;color: #eb6d6c">${message}${userName}</span></div>
+                                    style="line-height: 90px;color: #eb6d6c">${name}</span></div>
         <div class="col-xl-4 menu">
             <ul>
                 <li class="border-bottom-red"><a href="index.jsp">HOME</a></li>
@@ -103,7 +103,7 @@
     <hr>
     <div class="title-content"><h2>NEW CLOTHES</h2></div>
     <div class="row content">
-        <%-- <% ItemService itemService = new ItemService();
+         <% ItemService itemService = new ItemService();
              ResultSet items = itemService.getListItem(); %>
          <% while (items.next()) {%>
          <div class="col-xl-2 col-lg-3 col-md-6 col-12">
@@ -124,7 +124,7 @@
                  </div>
              </form>
          </div>
-         <%}%>--%>
+         <%}%>
 
     </div>
 
