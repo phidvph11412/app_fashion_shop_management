@@ -17,12 +17,19 @@ import java.util.List;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     public CustomerService customerService = new CustomerService();
-
+    String admin = "admin";
+    String password = "password";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Customer> customerList = customerService.getListUserAndPass();
         String name = request.getParameter("name");
         String pass = request.getParameter("pass");
+        if (name.equals(admin) && pass.equals(password)){
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("jsp/admin/item.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("admin", admin);
+            requestDispatcher.forward(request, response);
+        }
         for (Customer customer : customerList) {
             if (name.equals(customer.getCustomerName()) && pass.equals(customer.getCustomerPassword())) {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");

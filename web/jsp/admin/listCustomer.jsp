@@ -8,7 +8,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../../css/register.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,24 +17,47 @@
 <body>
 <div class="row">
     <div class="container">
-        <header class="header row">
-            <div class="col-xl-6 logo">
-                <h1><a href="/index.jsp">LOGO</a></h1>
+        <header class="row">
+            <div class="col-lg-6">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="/index.jsp">LOGO</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/index.jsp">HOME <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/index.jsp">SINGOUT <span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                        <span>${admin}</span>
+                    </div>
+                </nav>
+                <span>${message}</span>
             </div>
-            <div class="col-xl-6 menu">
-                <ul class="nav">
-                    <li class="border-bottom-red"><a href="/index.jsp">HOME</a></li>
-                    <li><a href="/jsp/login.jsp">LOGIN</a></li>
-                    <li><a href="/Customers?action=create">REGISTER</a></li>
-                    <li><a href="#footer-contact">CONTACT</a></li>
-                    <li><a href="#"><span class="fa-stack ">
-                  <i class="fa fa-circle-thin fa-stack-2x"></i>
-                  <i class="fa fa-facebook fa-stack-1x"></i>
-                </span></a></li>
-                    <li><a href=""> <span class="fa-stack "><i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-youtube fa-stack-1x"></i>
-                </span></a></li>
-                </ul>
+            <div class="col-lg-6">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/jsp/admin/item.jsp">LIST ITEM <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Customers">LIST CUSTOMER <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/index.jsp">LIST ORDER <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </nav>
             </div>
         </header>
         <nav class="navbar navbar-light bg-light">
