@@ -20,4 +20,6 @@ public interface ICustomerService {
     List<Customer> searchCustomer(String customerName) throws SQLException;
 
     public List<Customer> getListUserAndPass();
+
+    public String getPasswordByNameAndEmail(String customerName,String Email);
 }

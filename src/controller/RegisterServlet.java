@@ -175,7 +175,7 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("name");
         List<Customer> customers = customerService.searchCustomer(name);
         request.setAttribute("customerList", customers);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/listCustomer.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/admin/listCustomer.jsp");
         requestDispatcher.forward(request, response);
     }
 
