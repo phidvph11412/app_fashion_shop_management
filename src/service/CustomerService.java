@@ -116,6 +116,7 @@ public class CustomerService implements ICustomerService {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_Customer_SQL);) {
             statement.setString(1, customerName);
+            System.out.println(statement);
             rowDeleted = statement.executeUpdate() > 0;
         }
         return rowDeleted;
@@ -165,8 +166,8 @@ public class CustomerService implements ICustomerService {
         Connection connection = getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PASS);
-            preparedStatement.setString(1,customerName);
-            preparedStatement.setString(2,Email);
+            preparedStatement.setString(1, customerName);
+            preparedStatement.setString(2, Email);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return resultSet.getString(1);

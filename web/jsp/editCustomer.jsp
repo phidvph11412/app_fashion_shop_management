@@ -34,10 +34,11 @@
                 </span></a></li>
             </ul>
         </div>
+        <span></span>
     </header>
     <main class="content">
         <form method="post" action="/Customers" class="form-group form">
-            <h2 class="text-primary ">Register</h2>
+            <h2 class="text-primary ">EditCustomer</h2>
             <div class="form-group input-form ">
                 <label>User Name :</label>
                 <input type="text" name="name" value="${customers.getCustomerName()}" class=" form-control ">
@@ -45,10 +46,6 @@
             <div class="form-group input-form ">
                 <label>Password :</label>
                 <input type="password" name="pass"  value="${customers.getCustomerPassword()}" class="form-control ">
-            </div>
-            <div class="form-group input-form ">
-                <label>Re Password :</label>
-                <input type="password" name="repass" class="form-control ">
             </div>
             <div class="form-group input-form ">
                 <label>Phone Number : </label>
@@ -62,9 +59,16 @@
                 <label>Address :</label>
                 <input value="${customers.getCustomerAddress()}" type="text" name="address" rows="3"  class="form-control " >
             </div>
-            <button class="btn btn-primary btn-form-submit "
-                    type="submit" name="action" value="edit">EDIT
-            </button>
+            <center style="margin-top: 50px">
+                <button style="width: 100px" class="btn btn-primary "
+                        type="submit" name="action" value="edit">Edit
+                </button>
+                <button  style="width: 100px" class="btn btn-primary"><a href="/Customers" style="color: yellow ;" >Back</a></button>
+            </center>
+            <br>
+            <center style="margin-top: 50px;color: brown">
+                <h1> <span >${title1}</span></h1>
+            </center>
         </form>
     </main>
 
