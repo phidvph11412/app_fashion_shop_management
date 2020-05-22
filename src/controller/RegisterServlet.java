@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -189,17 +190,32 @@ public class RegisterServlet extends HttpServlet {
         if (validate.validatePass(pass) && validate.validatePhone(phone)
                 && validate.validateEmail(email) && validate.validateAddress(address)) {
             Customer customer = new Customer(name, pass, phone, email, address);
-            customerService.updateCustomer(customer);
+            boolean isUpdate = customerService.updateCustomer(customer);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editCustomer.jsp");
-            try {
-                requestDispatcher.forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            HttpSession session = request.getSession();
+            if (isUpdate) {
+                session.setAttribute("title1", "Edit success");
+                try {
+                    requestDispatcher.forward(request, response);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                session.setAttribute("title1", "Edit no success");
+                try {
+                    requestDispatcher.forward(request, response);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/Error.jsp");
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("title1", "Edit no success");
             try {
                 requestDispatcher.forward(request, response);
             } catch (ServletException e) {

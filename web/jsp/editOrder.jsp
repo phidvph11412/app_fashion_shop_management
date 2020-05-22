@@ -43,7 +43,7 @@
     </header>
     <main class="content">
         <form method="post" action="/order-update" class="form-group form">
-            <h2 class="text-primary ">EDIT</h2>
+            <h2 class="text-primary ">Edit Order</h2>
             <div class="form-group input-form ">
                 <label> Name :</label>
                 <input type="text" name="name" value="${orders.getCustomerName()}" class=" form-control ">
@@ -60,9 +60,16 @@
                 <label>Status :</label>
                 <input type="text" name="status"value="${orders.isStatus() }" class="form-control ">
             </div>
-            <button class="btn btn-primary btn-form-submit "
-                    type="submit" name="action" value="edit">EDIT
-            </button>
+            <center style="margin-top: 50px">
+                <button style="width: 100px" class="btn btn-primary "
+                        type="submit" name="action" value="edit">Edit
+                </button>
+                <button  style="width: 100px" class="btn btn-primary"><a href="/order-update" style="color: yellow ;" >Back</a></button>
+            </center>
+            <br>
+           <center style="margin-top: 50px;color: brown">
+               <h1> <span >${title}</span></h1>
+           </center>
         </form>
     </main>
 
