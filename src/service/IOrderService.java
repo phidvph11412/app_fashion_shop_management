@@ -12,5 +12,9 @@ public interface IOrderService {
 
     public List<Order> getListOder() throws SQLException;
 
-    Order selectOder(String customerName,String itemId) throws SQLException;
+    Order selectOder(String customerName, String itemId) throws SQLException;
+
+    boolean deleteOder(String customerName, String itemId) throws SQLException;
+
+    List<Order> search(String name) throws SQLException;
 }

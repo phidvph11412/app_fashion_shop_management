@@ -3,6 +3,7 @@ package controller;
 import model.Order;
 import service.OrderService;
 
+import javax.print.attribute.standard.OrientationRequested;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "OrderAdminServlet", urlPatterns = "/order-update")
@@ -30,6 +32,13 @@ public class OrderAdminServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "find":
+                try {
+                    search(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
         }
     }
 
@@ -42,6 +51,13 @@ public class OrderAdminServlet extends HttpServlet {
             case "edit":
                 try {
                     ShowEditOder(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "delete":
+                try {
+                    delete(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -74,6 +90,14 @@ public class OrderAdminServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+    private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String name = request.getParameter("name");
+        List<Order> orderList = orderService.search(name);
+        request.setAttribute("orderList", orderList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("jsp/listOder.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
     private void ShowEditOder(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String name = request.getParameter("name");
         String item = request.getParameter("item");
@@ -81,6 +105,16 @@ public class OrderAdminServlet extends HttpServlet {
         System.out.println(order.getCustomerName());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
         request.setAttribute("orders", order);
+        requestDispatcher.forward(request, response);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String name = request.getParameter("name");
+        String item = request.getParameter("item");
+        orderService.deleteOder(name, item);
+        List<Order> orderList = new ArrayList<>();
+        request.setAttribute("order", orderList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
         requestDispatcher.forward(request, response);
     }
 }
