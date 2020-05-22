@@ -104,35 +104,28 @@
     <hr>
     <div class="title-content"><h2>NEW CLOTHES</h2></div>
     <div class="row content">
-        <% ItemService itemService = new ItemService();
-            ResultSet items = itemService.getListItem();
-            int count = -1; %>
-        <% while (items.next()) {
-            count++;
-            if (count == 12)
-                break; %>
 
-        <div class="col-xl-2 col-lg-3 col-md-6 col-12">
-            <form action="/home" method="post">
-                <div class="card" style="width: 16rem;">
-                    <img src="../img/<%=items.getString(3)%>" class="card-img-top" width="15rem" ; height="200px"
-                         alt="">
-                    <div class="card-body">
-                        <p><input type="hidden" name="itemID" value="<%=items.getString(1)%>"></p>
-                        <p> Name : <%=items.getString(2)%>
-                        </p>
-                        <p> Price : <%=items.getString(4)%>
-                        </p>
-                        <p> Amount : <%=items.getString(5)%>
-                        </p>
-                        <button type="submit" name="action" value="add-to-cart" class="btn btn-primary">AddCart
-                        </button>
+        <c:forEach items="${itemList}" var="item">
+            <div class="col-xl-2 col-lg-3 col-md-6 col-12">
+                <form action="/home" method="post">
+                    <div class="card" style="width: 16rem;">
+                        <img src="../img/${item.getItemImage()}" class="card-img-top" width="15rem" ; height="200px"
+                             alt="">
+                        <div class="card-body">
+                            <p><input type="hidden" name="itemID" value="${item.getItemID()}"></p>
+                            <p> Name : ${item.getItemName()}
+                            </p>
+                            <p> Price : ${item.getItemPrice()}
+                            </p>
+                            <p> Amount : ${item.getItemAmount()}
+                            </p>
+                            <button type="submit" name="action" value="add-to-cart" class="btn btn-primary">AddCart
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <%}%>
-
+                </form>
+            </div>
+        </c:forEach>
 
     </div>
     <div><a href="/home?list=1"> 1 </a> <a href="/home?list=2"> 2 </a></div>
