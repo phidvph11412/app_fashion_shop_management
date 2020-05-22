@@ -73,7 +73,7 @@ public class OrderService implements IOrderService {
         while (resultSet.next()) {
             String customerName = resultSet.getString("customerName");
             String itemId = resultSet.getString("itemId");
-            int amount = Integer.parseInt(resultSet.getString("amount"));
+            int amount = resultSet.getInt("amount");
             boolean status = resultSet.getBoolean("status");
             orderList.add(new Order(customerName, itemId, amount, status));
         }
