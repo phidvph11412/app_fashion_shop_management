@@ -70,6 +70,7 @@
             <a href="/Customers?action=showRegister" class="btn btn-success">Add New Customer</a>
         </div>
         <br>
+
         <table class="table table-success table-hover">
             <thead>
             <tr>

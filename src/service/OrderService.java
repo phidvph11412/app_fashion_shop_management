@@ -11,7 +11,7 @@ public class OrderService implements IOrderService {
     DAL dal;
     private String url = "jdbc:mysql://localhost:3306/lucy_shop";
     private String user = "root";
-    private String pass = "";
+    private String pass = "password";
     private static final String SELECT_ODER = "select customerName  ,itemId ,amount ,status  from orders";
     private static final String UPDATE_ORDER = "update orders set  amount = ?  ,status = ? where customerName = ?  and itemId = ?";
     private static final String SELECT_ODER_NAME = "select customerName , itemId , amount,status from orders where customerName = ? and itemId = ?";
@@ -74,7 +74,7 @@ public class OrderService implements IOrderService {
         while (resultSet.next()) {
             String customerName = resultSet.getString("customerName");
             String itemId = resultSet.getString("itemId");
-            int amount = Integer.parseInt(resultSet.getString("amount"));
+            int amount = resultSet.getInt("amount");
             boolean status = resultSet.getBoolean("status");
             orderList.add(new Order(customerName, itemId, amount, status));
         }

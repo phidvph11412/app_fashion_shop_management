@@ -48,7 +48,7 @@
             </div>
 
             <button class="btn btn-primary btn-form-submit "
-                    type="submit" name="action" value="login">LOGIN
+                    type="submit" name="action" value="login1">LOGIN
             </button>
           <div class="form-group input-form ">
               <a class="nav-link active" href="/jsp/forgotpassword.jsp">forgot password</a>
