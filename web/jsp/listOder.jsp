@@ -57,7 +57,7 @@
             </div>
         </header>
         <nav class="navbar navbar-light bg-light">
-            <form class="form-inline" method="post" action="/Customers">
+            <form class="form-inline" method="post" action="/order-update">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" name="action" value="find" type="submit">Search</button>
             </form>
@@ -86,7 +86,7 @@
                     <td>
                         <a href="/order-update?action=edit&name=${oder.customerName}&item=${oder.itemId}"> Edit</a>
                         <br>
-                        <a href="/order-update?action=delete&name=${oder.customerName}"> Delete </a>
+                        <a href="/order-update?action=delete&name=${oder.customerName}&item=${oder.itemId}"> Delete </a>
                     </td>
                 </tr>
             </c:forEach>

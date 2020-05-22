@@ -40,27 +40,27 @@
             <h2 class="text-primary ">Register</h2>
             <div class="form-group input-form ">
                 <label>User Name :</label>
-                <input type="text" name="name" value="${customers.getCustomerName()}" class=" form-control ">
+                <input type="text" placeholder="tên thường,hoa không có số,kí tự đặc biệt" name="name" value="${customers.getCustomerName()}" class=" form-control ">
             </div>
             <div class="form-group input-form ">
                 <label>Password :</label>
-                <input type="password" name="pass"  value="${customers.getCustomerPassword()}" class="form-control ">
+                <input type="password" placeholder="mật khẩu ít nhật có 6 kí tự và có từ 1-5 số" name="pass"  value="${customers.getCustomerPassword()}" class="form-control ">
             </div>
             <div class="form-group input-form ">
                 <label>Re Password :</label>
-                <input type="password" name="repass" class="form-control ">
+                <input type="password" placeholder="nhập lại mật khẩu" name="repass" class="form-control ">
             </div>
             <div class="form-group input-form ">
                 <label>Phone Number : </label>
-                <input type="text" name="phone" value="${customers.getCustomerPhoneNumber()}" class="form-control ">
+                <input type="text" name="phone" placeholder="+84-09xxxxxxxx" value="${customers.getCustomerPhoneNumber()}" class="form-control ">
             </div>
             <div class="form-group input-form ">
                 <label>Email :</label>
-                <input type="email" name="email"value="${customers.getCustomerEmail()}" class="form-control ">
+                <input type="email" placeholder="lebadat@gmail.com" name="email"value="${customers.getCustomerEmail()}" class="form-control ">
             </div>
             <div class="form-group textarea-form ">
                 <label>Address :</label>
-                <input value="${customers.getCustomerAddress()}" type="text" name="address" rows="3"  class="form-control " >
+                <input value="${customers.getCustomerAddress()}" placeholder="trungtrac-vanlam-hungyen" type="text" name="address" rows="3"  class="form-control " >
             </div>
             <button class="btn btn-primary btn-form-submit "
                     type="submit" name="action" value="create">register

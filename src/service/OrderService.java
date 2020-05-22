@@ -15,6 +15,7 @@ public class OrderService implements IOrderService {
     private static final String SELECT_ODER = "select customerName  ,itemId ,amount ,status  from orders";
     private static final String UPDATE_ORDER = "update orders set  amount = ?  ,status = ? where customerName = ?  and itemId = ?";
     private static final String SELECT_ODER_NAME = "select customerName , itemId , amount,status from orders where customerName = ? and itemId = ?";
+    private static final String DELETE_ODER = "delete from orders where customerName = ? and itemId =? ";
 
     public Connection getConnection() {
         Connection connection = null;
@@ -96,6 +97,37 @@ public class OrderService implements IOrderService {
             order = new Order(name, item, amount, status);
         }
         return order;
+    }
+
+    @Override
+    public boolean deleteOder(String customerName, String itemId) throws SQLException {
+        boolean rowDelete;
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ODER);
+        preparedStatement.setString(1, customerName);
+        preparedStatement.setString(2, itemId);
+        rowDelete = preparedStatement.executeUpdate() > 0;
+        System.out.println(preparedStatement);
+        return rowDelete;
+    }
+
+    @Override
+    public List<Order> search(String name) throws SQLException {
+        List<Order> orderList = new ArrayList<>();
+        Connection connection = getConnection();
+        String sql = "{call getInforOder(?)}";
+        CallableStatement statement = connection.prepareCall(sql);
+        String name1 = "%" + name + "%";
+        statement.setString(1, name1);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            String customerName = resultSet.getString("customerName");
+            String item = resultSet.getString("itemId");
+            int amount = resultSet.getInt("amount");
+            boolean status = resultSet.getBoolean("status");
+            orderList.add(new Order(customerName, item, amount, status));
+        }
+        return orderList;
     }
 
     private void printSQLException(SQLException ex) {
