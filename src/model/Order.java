@@ -17,6 +17,7 @@ public class Order {
         this.listItem = listItem;
     }
 
+
     public Order(String name, String id, int amount, float price, String status) {
         this.customerName = name;
         this.itemId = id;
@@ -32,6 +33,7 @@ public class Order {
     public void setPrice(float price) {
         this.price = price;
     }
+
 
     public String getStatus() {
         return status;
@@ -57,7 +59,9 @@ public class Order {
         this.itemId = itemId;
     }
 
-    public Order(String customerName, int amount, String status) {
+
+    public Order(String customerName,  int amount,String status) {
+
         this.customerName = customerName;
         this.amount = amount;
         this.status = status;

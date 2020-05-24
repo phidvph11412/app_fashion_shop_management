@@ -141,7 +141,7 @@ public class OrderService implements IOrderService {
     public List<Order> search(String name) throws SQLException {
         List<Order> orderList = new ArrayList<>();
         Connection connection = getConnection();
-        String sql = "{call getInforOder(?)}";
+        String sql = "{call getOderByStatus(?)}";
         CallableStatement statement = connection.prepareCall(sql);
         String name1 = "%" + name + "%";
         statement.setString(1, name1);
