@@ -44,13 +44,15 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/jsp/admin/item.jsp">LIST ITEM <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/item-update">LIST ITEM <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/Customers">LIST CUSTOMER <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/Customers">LIST CUSTOMER <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/order-update">LIST ORDER <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/order-update">LIST ORDER <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -59,7 +61,8 @@
         <nav class="navbar navbar-light bg-light">
             <form class="form-inline" method="post" action="/order-update">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" name="action" value="find" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" name="action" value="find" type="submit">Search
+                </button>
             </form>
         </nav>
         <div class="container text-left">
@@ -82,7 +85,7 @@
                     <td><c:out value="${oder.getCustomerName()}"/></td>
                     <td><c:out value="${oder.getItemId()}"/></td>
                     <td><c:out value="${oder.getAmount()}"/></td>
-                    <td><c:out value="${oder.isStatus()}"/></td>
+                    <td><c:out value="${oder.getStatus()}"/></td>
                     <td>
                         <a href="/order-update?action=edit&name=${oder.customerName}&item=${oder.itemId}"> Edit</a>
                         <br>

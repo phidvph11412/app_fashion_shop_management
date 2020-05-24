@@ -41,29 +41,26 @@
     </header>
     <div class="order-content row">
         <div class="list-item col-xl-9">
-            <table class="table table-hover .table-borderless ">
-                <c:forEach items="${order.getListItem()}" var="item">
+            <table class="table table-hover table-borderless ">
+                <c:forEach items="${oldOrderList}" var="oldOrder">
                     <tr>
-                        <td rowspan="2" colspan="1"><img src="../img/${item.getItemImage()}" alt="" width="300px"
-                                                         height="200px"></td>
-                        <td colspan="4"><p>Name : ${item.getItemName()}</p></td>
-                    </tr>
-                    <tr>
-                        <td><p>Price : ${item.getItemPrice()}</p></td>
+                        <td><p>ID : ${oldOrder.getItemId()}</p></td>
+                        <td><p>Price : ${oldOrder.getPrice()}</p></td>
                         <td>SL :
                             <button value="" name="action">-</button>
-                                ${item.getItemAmount()}
+                                ${oldOrder.getAmount()}
                             <button>+</button>
                         </td>
-                        <td>Thanh tien :${item.getItemAmount() * item.getItemPrice()} </td>
+                        <td>Thanh tien :${oldOrder.getAmount() * oldOrder.getPrice()} </td>
+                        <td>Trang thai :${oldOrder.getStatus()} </td>
                         <td>
                             <button>Xoa</button>
                         </td>
                     </tr>
                 </c:forEach>
-
             </table>
         </div>
+
         <div class="pay col-xl-3">
             <form action="/buy" method="post">
                 <table>
@@ -81,9 +78,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${order.getListItem()}" var="item">
+                    <c:forEach items="${newOrder.getListItem()}" var="item">
                         <tr>
-                            <th scope="row">item</th>
+                            <td scope="row">item</td>
                             <td>${item.getItemName()}</td>
                             <td>${item.getItemAmount()}</td>
                             <td>${item.getItemAmount() * item.getItemPrice()}</td>
@@ -92,7 +89,7 @@
 
                     <tr>
                         <td colspan="2">Tong tien</td>
-                        <c:forEach items="${order.getListItem()}" var="item">
+                        <c:forEach items="${newOrder.getListItem()}" var="item">
                             <c:set var="sum" value="${sum+ (item.getItemAmount() * item.getItemPrice()) }"/>
                         </c:forEach>
                         <td colspan="1"><c:out value="${sum}"/></td>
@@ -106,6 +103,22 @@
                 </table>
             </form>
             <span>${message}</span>
+        </div>
+        <div class="cart">
+            <table class="table table-hover table-borderless ">
+                <c:forEach items="${newOrder.getListItem()}" var="item">
+                    <tr>
+                        <td>${item.getItemID()}</td>
+                        <td>${item.getItemName()}</td>
+                        <td>${item.getItemImage()}</td>
+                        <td>${item.getItemAmount()}</td>
+                        <td>${item.getItemPrice()}</td>
+                        <td>${item.getItemCategory()}</td>
+                        <td>${item.getItemDescribe()}</td>
+                    </tr>
+                </c:forEach>
+
+            </table>
         </div>
     </div>
 

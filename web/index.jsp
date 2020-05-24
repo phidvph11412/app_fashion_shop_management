@@ -43,7 +43,8 @@
                 <li class="border-bottom-red"><a href="index.jsp">HOME</a></li>
                 <li><a href="jsp/login.jsp">LOGIN</a></li>
                 <li><a href="jsp/register.jsp">REGISTER</a></li>
-                <li><a href="jsp/order.jsp">CART</a></li>
+                <li><a href="/home?action=cart">CART</a></li>
+                <li><a href="/home?action=logout">LOGOUT</a></li>
                 <li class="icon"><a href="https://www.facebook.com/fc.ngoclich"><span class="fa-stack ">
                   <i class="fa fa-circle-thin fa-stack-2x"></i>
                   <i class="fa fa-facebook fa-stack-1x"></i>
@@ -135,7 +136,7 @@
 
 
     </div>
-    <div><a href="/home?list=1"> 1 </a> <a href="/home?list=2"> 2 </a></div>
+    <div><a href="/home?action=1"> 1 </a> <a href="/home?action=2"> 2 </a></div>
 
     <hr>
 

@@ -11,4 +11,5 @@ public interface IItemService {
     public boolean saveDataItem(Item item);
     public boolean deleteItemByID(String id);
     public boolean editItemByID(String id , Item item);
+    ResultSet getListItemByCategoryAndPrice(String category, float minPrice, float maxPrice);
 }

@@ -16,6 +16,10 @@ public class OrderService implements IOrderService {
     private static final String UPDATE_ORDER = "update orders set  amount = ?  ,status = ? where customerName = ?  and itemId = ?";
     private static final String SELECT_ODER_NAME = "select customerName , itemId , amount,status from orders where customerName = ? and itemId = ?";
     private static final String DELETE_ODER = "delete from orders where customerName = ? and itemId =? ";
+    private static final String GET_ORDER_BY_ID = "select * from orders where customerName = ?";
+    private static final String UPDATE_AMOUNT = "update orders set amount = ? where customerName = ?  and itemId = ? ";
+
+
 
     public Connection getConnection() {
         Connection connection = null;
@@ -35,6 +39,9 @@ public class OrderService implements IOrderService {
     }
 
     public boolean saveOrder(Order order) {
+        if (order == null){
+            return false;
+        }
         ArrayList<Item> listItem = order.getListItem();
         if (listItem.size() >= 1) {
             for (Item item : listItem) {
@@ -47,6 +54,7 @@ public class OrderService implements IOrderService {
         }
     }
 
+
     @Override
     public boolean updateOrder(Order order) throws SQLException {
         boolean rowUpdate = false;
@@ -56,7 +64,7 @@ public class OrderService implements IOrderService {
             preparedStatement.setString(3, order.getCustomerName());
             preparedStatement.setString(4, order.getItemId());
             preparedStatement.setInt(1, order.getAmount());
-            preparedStatement.setBoolean(2, order.isStatus());
+            preparedStatement.setString(2, order.getStatus());
             rowUpdate = preparedStatement.executeUpdate() > 0;
             System.out.println(preparedStatement);
         } catch (SQLException ex) {
@@ -75,7 +83,7 @@ public class OrderService implements IOrderService {
             String customerName = resultSet.getString("customerName");
             String itemId = resultSet.getString("itemId");
             int amount = resultSet.getInt("amount");
-            boolean status = resultSet.getBoolean("status");
+            String status = resultSet.getString("status");
             orderList.add(new Order(customerName, itemId, amount, status));
         }
         return orderList;
@@ -93,7 +101,7 @@ public class OrderService implements IOrderService {
             String name = resultSet.getString("customerName");
             String item = resultSet.getString("itemId");
             int amount = Integer.parseInt(resultSet.getString("amount"));
-            boolean status = resultSet.getBoolean("status");
+            String status = resultSet.getString("status");
             order = new Order(name, item, amount, status);
         }
         return order;
@@ -111,6 +119,24 @@ public class OrderService implements IOrderService {
         return rowDelete;
     }
 
+    public ArrayList<Order> getListOrderByName(String customerName) throws SQLException {
+        ArrayList<Order> listOrder = new ArrayList<>();
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_ID);
+        preparedStatement.setString(1, customerName);
+        ResultSet orders = preparedStatement.executeQuery();
+        while (orders.next()) {
+            String name = orders.getString(1);
+            String id = orders.getString(2);
+            int amount = orders.getInt(3);
+            float price = orders.getFloat(4);
+            String status = orders.getString(5);
+            listOrder.add(new Order(name, id, amount, price, status));
+        }
+        System.out.println(preparedStatement);
+        return listOrder;
+    }
+
     @Override
     public List<Order> search(String name) throws SQLException {
         List<Order> orderList = new ArrayList<>();
@@ -124,10 +150,20 @@ public class OrderService implements IOrderService {
             String customerName = resultSet.getString("customerName");
             String item = resultSet.getString("itemId");
             int amount = resultSet.getInt("amount");
-            boolean status = resultSet.getBoolean("status");
+            String status = resultSet.getString("status");
             orderList.add(new Order(customerName, item, amount, status));
         }
         return orderList;
+    }
+
+    @Override
+    public Boolean changeAmount(String name, String id , int amount) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AMOUNT);
+        preparedStatement.setInt(1, amount);
+        preparedStatement.setString(2, name);
+        preparedStatement.setString(3, id);
+        return preparedStatement.executeUpdate() > 0 ? true : false;
     }
 
     private void printSQLException(SQLException ex) {

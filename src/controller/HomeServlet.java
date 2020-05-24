@@ -4,6 +4,7 @@ import com.mysql.cj.x.protobuf.MysqlxCrud;
 import model.Item;
 import model.Order;
 import service.ItemService;
+import service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,37 +20,64 @@ import java.util.ArrayList;
 @WebServlet(name = "HomeServlet", urlPatterns = "/home")
 public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null){
+            action = "";
+        }
+        switch (action){
+            case "add-to-cart" :
+                try {
+                    addItemToCart(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+        }
+
+    }
+
+    private void addItemToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         ItemService itemService = new ItemService();
         HttpSession session = request.getSession();
         int defaultQuantity = 1;
         int defaultId = 1;
+        String name = (String) session.getAttribute("name");
 
         if (session.getAttribute("name") == null) {
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            return;
         } else {
-            if (session.getAttribute("order") == null) {
+            if (session.getAttribute("newOrder") == null) {
                 String id = request.getParameter("itemID");
                 ResultSet item = itemService.getItemByID(id);
                 try {
                     ArrayList<Item> listItem = new ArrayList<>();
                     item.next();
                     listItem.add(new Item(item.getString(1), item.getString(2), item.getString(3), item.getFloat(4), defaultQuantity, item.getString(6), item.getString(7)));
-                    String name = (String) session.getAttribute("name");
                     Order order = new Order(defaultId, name, listItem);
-                    session.setAttribute("order", order);
+                    //return new cart
+                    session.setAttribute("newOrder", order);
+                    //get old cart
+                    OrderService orderService = new OrderService();
+                    ArrayList<Order> oldOrderList = orderService.getListOrderByName(name);
+                    request.setAttribute("oldOrderList", oldOrderList);
                     request.getRequestDispatcher("jsp/order.jsp").forward(request, response);
-
+                    return;
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
             } else {
-                Order order = (Order) session.getAttribute("order");
+                Order order = (Order) session.getAttribute("newOrder");
                 ArrayList<Item> listItem = order.getListItem();
                 String id = request.getParameter("itemID");
                 boolean isExist = false;
                 for (Item item : listItem) {
                     if (item.getItemID().equals(id)) {
                         item.setItemAmount(item.getItemAmount() + defaultQuantity);
+                        //get old cart
+                        OrderService orderService = new OrderService();
+                        ArrayList<Order> oldOrderList = orderService.getListOrderByName(name);
+                        request.setAttribute("oldOrderList", oldOrderList);
                         request.getRequestDispatcher("jsp/order.jsp").forward(request, response);
                         isExist = true;
                     }
@@ -60,7 +88,11 @@ public class HomeServlet extends HttpServlet {
                     try {
                         item.next();
                         listItem.add(new Item(item.getString(1), item.getString(2), item.getString(3), item.getFloat(4), defaultQuantity, item.getString(6), item.getString(7)));
-                        session.setAttribute("order", order);
+                        session.setAttribute("newOrder", order);
+                        //get old cart
+                        OrderService orderService = new OrderService();
+                        ArrayList<Order> oldOrderList = orderService.getListOrderByName(name);
+                        request.setAttribute("oldOrderList", oldOrderList);
                         request.getRequestDispatcher("jsp/order.jsp").forward(request, response);
 
                     } catch (SQLException throwables) {
@@ -69,22 +101,21 @@ public class HomeServlet extends HttpServlet {
                 }
             }
         }
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("list");
+        String action = request.getParameter("action");
         if (action == null) {
             action = "";
         }
         switch (action) {
-            case "1" : try {
-                showFirstList(request, response);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-            break;
+            case "1":
+                try {
+                    showFirstList(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             case "2":
                 try {
                     showSecondList(request, response);
@@ -92,7 +123,38 @@ public class HomeServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "logout": deleteSession(request, response);
+               break;
+            case "cart" :
+                try {
+                    showCartByName(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
         }
+    }
+
+    private void showCartByName(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        String name = (String) session.getAttribute("name");
+        if (name == null){
+            request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+        }else {
+            // show old order and new order if exist
+            OrderService orderService = new OrderService();
+            ArrayList<Order> listOrder = orderService.getListOrderByName(name);
+            request.setAttribute("oldOrderList", listOrder);
+            request.getRequestDispatcher("/jsp/order.jsp").forward(request, response);
+        }
+
+    }
+
+    private void deleteSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("name");
+        session.removeAttribute("newOrder");
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+
     }
 
     private void showSecondList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
