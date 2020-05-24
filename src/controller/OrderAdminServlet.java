@@ -81,24 +81,100 @@ public class OrderAdminServlet extends HttpServlet {
         String amount = request.getParameter("amount");
         String status = request.getParameter("status");
 
-        if (validateItem.validateAmount(amount)) {
+        Order order = orderService.selectOder(name, item);
+        if (order.getStatus().equals("NoProcess")) {
+            if (status.equals("NoProcess") || status.equals("Process")) {
+                if (validateItem.validateAmount(amount)) {
+                    int amount1 = Integer.parseInt(amount);
+                    Order order1 = new Order(name, item, amount1, status);
+                    boolean isUpdated = orderService.updateOrder(order1);
+                    if (isUpdated) {
+                        request.setAttribute("message", "Edit  success");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                        request.setAttribute("orders", order1);
+                        requestDispatcher.forward(request, response);
 
-            int amount1 = Integer.parseInt(amount);
-            Order order = new Order(name, item, amount1, status);
-            boolean isUpdated = orderService.updateOrder(order);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
-            if (isUpdated) {
-                request.setAttribute("title", "Edit  success");
-                requestDispatcher.forward(request, response);
-            } else {
-                request.setAttribute("title", "Edit no success ");
+                    } else {
+                        request.setAttribute("message", "Edit no  success");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                        request.setAttribute("orders", order);
+                        requestDispatcher.forward(request, response);
+                    }
+                } else {
+                    request.setAttribute("message", "Edit no  success");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                    request.setAttribute("orders", order);
+                    requestDispatcher.forward(request, response);
+                }
+
+            }else {
+                request.setAttribute("message", "Edit no  success");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                request.setAttribute("orders", order);
                 requestDispatcher.forward(request, response);
             }
-        } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
-            HttpSession session = request.getSession();
-            session.setAttribute("title", "Edit no success ");
-            requestDispatcher.forward(request, response);
+        } else if (order.getStatus().equals("Process")) {
+            if (status.equals("Process") || status.equals("Processed")) {
+                if (validateItem.validateAmount(amount)) {
+                    int amount1 = Integer.parseInt(amount);
+                    Order order1 = new Order(name, item, amount1, status);
+                    boolean isUpdated = orderService.updateOrder(order1);
+                    if (isUpdated) {
+                        request.setAttribute("message", "Edit  success");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                        request.setAttribute("orders", order1);
+                        requestDispatcher.forward(request, response);
+
+                    } else {
+                        request.setAttribute("message", "Edit no  success");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                        request.setAttribute("orders", order);
+                        requestDispatcher.forward(request, response);
+                    }
+                } else {
+                    request.setAttribute("message", "Edit no  success");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                    request.setAttribute("orders", order);
+                    requestDispatcher.forward(request, response);
+                }
+
+            } else {
+                request.setAttribute("message", "Edit no  success");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                request.setAttribute("orders", order);
+                requestDispatcher.forward(request, response);
+            }
+        } else if (order.getStatus().equals("Processed")) {
+            if (status.equals("Processed")) {
+                if (validateItem.validateAmount(amount)) {
+                    int amount1 = Integer.parseInt(amount);
+                    Order order1 = new Order(name, item, amount1, status);
+                    boolean isUpdated = orderService.updateOrder(order1);
+                    if (isUpdated) {
+                        request.setAttribute("message", "Edit  success");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                        request.setAttribute("orders", order1);
+                        requestDispatcher.forward(request, response);
+
+                    } else {
+                        request.setAttribute("message", "Edit no  success");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                        request.setAttribute("orders", order);
+                        requestDispatcher.forward(request, response);
+                    }
+                } else {
+                    request.setAttribute("message", "Edit no  success");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                    request.setAttribute("orders", order);
+                    requestDispatcher.forward(request, response);
+                }
+
+            } else {
+                request.setAttribute("message", "Edit no success");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+                request.setAttribute("orders", order);
+                requestDispatcher.forward(request, response);
+            }
         }
     }
 
@@ -121,6 +197,7 @@ public class OrderAdminServlet extends HttpServlet {
         String name = request.getParameter("name");
         String item = request.getParameter("item");
         Order order = orderService.selectOder(name, item);
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
         request.setAttribute("orders", order);
         requestDispatcher.forward(request, response);
