@@ -11,7 +11,7 @@ public class OrderService implements IOrderService {
     DAL dal;
     private String url = "jdbc:mysql://localhost:3306/lucy_shop";
     private String user = "root";
-    private String pass = "password";
+    private String pass = "";
     private static final String SELECT_ODER = "select customerName  ,itemId ,amount ,status  from orders";
     private static final String UPDATE_ORDER = "update orders set  amount = ?  ,status = ? where customerName = ?  and itemId = ?";
     private static final String SELECT_ODER_NAME = "select customerName , itemId , amount,status from orders where customerName = ? and itemId = ?";
@@ -56,7 +56,7 @@ public class OrderService implements IOrderService {
             preparedStatement.setString(3, order.getCustomerName());
             preparedStatement.setString(4, order.getItemId());
             preparedStatement.setInt(1, order.getAmount());
-            preparedStatement.setBoolean(2, order.isStatus());
+            preparedStatement.setString(2, order.getStatus());
             rowUpdate = preparedStatement.executeUpdate() > 0;
             System.out.println(preparedStatement);
         } catch (SQLException ex) {
@@ -75,7 +75,7 @@ public class OrderService implements IOrderService {
             String customerName = resultSet.getString("customerName");
             String itemId = resultSet.getString("itemId");
             int amount = resultSet.getInt("amount");
-            boolean status = resultSet.getBoolean("status");
+            String status = resultSet.getString("status");
             orderList.add(new Order(customerName, itemId, amount, status));
         }
         return orderList;
@@ -93,7 +93,7 @@ public class OrderService implements IOrderService {
             String name = resultSet.getString("customerName");
             String item = resultSet.getString("itemId");
             int amount = Integer.parseInt(resultSet.getString("amount"));
-            boolean status = resultSet.getBoolean("status");
+            String status = resultSet.getString("status");
             order = new Order(name, item, amount, status);
         }
         return order;
@@ -115,7 +115,7 @@ public class OrderService implements IOrderService {
     public List<Order> search(String name) throws SQLException {
         List<Order> orderList = new ArrayList<>();
         Connection connection = getConnection();
-        String sql = "{call getInforOder(?)}";
+        String sql = "{call getOderByStatus(?)}";
         CallableStatement statement = connection.prepareCall(sql);
         String name1 = "%" + name + "%";
         statement.setString(1, name1);
@@ -124,7 +124,7 @@ public class OrderService implements IOrderService {
             String customerName = resultSet.getString("customerName");
             String item = resultSet.getString("itemId");
             int amount = resultSet.getInt("amount");
-            boolean status = resultSet.getBoolean("status");
+            String status = resultSet.getString("status");
             orderList.add(new Order(customerName, item, amount, status));
         }
         return orderList;

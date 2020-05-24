@@ -6,7 +6,7 @@ public class Order {
     private int orderID;
     private String customerName;
     private ArrayList<Item> listItem = new ArrayList<>();
-    private boolean status;
+    private String status;
     private int amount;
     private String itemId;
 
@@ -16,11 +16,11 @@ public class Order {
         this.listItem = listItem;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -40,13 +40,13 @@ public class Order {
         this.itemId = itemId;
     }
 
-    public Order(String customerName,  int amount,boolean status) {
+    public Order(String customerName,  int amount,String status) {
         this.customerName = customerName;
         this.amount = amount;
         this.status = status;
     }
 
-    public Order(String customerName, String itemId, int amount, boolean status) {
+    public Order(String customerName, String itemId, int amount, String status) {
         this.customerName = customerName;
         this.itemId = itemId;
         this.amount = amount;

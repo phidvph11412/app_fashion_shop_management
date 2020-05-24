@@ -79,8 +79,8 @@ public class OrderAdminServlet extends HttpServlet {
         String name = request.getParameter("name");
         String item = request.getParameter("itemId");
         String amount = request.getParameter("amount");
-        boolean status = Boolean.parseBoolean(request.getParameter("status"));
-        if (validateItem.validateAmount(amount) ) {
+        String status = request.getParameter("status");
+        if (validateItem.validateAmount(amount)) {
             int amount1 = Integer.parseInt(amount);
             Order order = new Order(name, item, amount1, status);
             boolean isUpdated = orderService.updateOrder(order);
@@ -119,7 +119,6 @@ public class OrderAdminServlet extends HttpServlet {
         String name = request.getParameter("name");
         String item = request.getParameter("item");
         Order order = orderService.selectOder(name, item);
-        System.out.println(order.getCustomerName());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
         request.setAttribute("orders", order);
         requestDispatcher.forward(request, response);
