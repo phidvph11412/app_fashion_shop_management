@@ -44,7 +44,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/jsp/admin/item.jsp">LIST ITEM <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/item-update">LIST ITEM <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="/Customers">LIST CUSTOMER <span class="sr-only">(current)</span></a>

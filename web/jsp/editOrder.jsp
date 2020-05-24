@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: samsung
-  Date: 5/19/20
-  Time: 2:12 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -61,7 +55,7 @@
                 <select name="status">
                     <option value="NoProcess">NoProcess</option>
                     <option value="Process">Process</option>
-                    <option  value="Processed">Processed</option>
+                    <option value="Processed">Processed</option>
                 </select>
                 <%--                <input type="text" name="status" value="${orders.getStatus() }" class="form-control ">--%>
             </div>
@@ -69,8 +63,9 @@
                 <button style="width: 100px" class="btn btn-primary "
                         type="submit" name="action" value="edit">Edit
                 </button>
-                <button style="width: 100px" class="btn btn-primary"><a href="/order-update" style="color: yellow ;">Back</a>
+                <button style="width: 100px"  class="btn btn-primary"><a href="/order-update" style="color: yellow ;">Back</a>
                 </button>
+                <h3>${message}</h3>
             </center>
             <br>
             <center style="margin-top: 50px;color: brown">
