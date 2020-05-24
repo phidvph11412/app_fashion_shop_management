@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("name");
         String pass = request.getParameter("pass");
         if (name.equals(admin) && pass.equals(password)) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("jsp/admin/item.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/listOder.jsp");
             HttpSession session = request.getSession();
             session.setAttribute("admin", admin);
             requestDispatcher.forward(request, response);

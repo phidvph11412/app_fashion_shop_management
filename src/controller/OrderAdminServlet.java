@@ -80,7 +80,9 @@ public class OrderAdminServlet extends HttpServlet {
         String item = request.getParameter("itemId");
         String amount = request.getParameter("amount");
         String status = request.getParameter("status");
+
         if (validateItem.validateAmount(amount)) {
+
             int amount1 = Integer.parseInt(amount);
             Order order = new Order(name, item, amount1, status);
             boolean isUpdated = orderService.updateOrder(order);

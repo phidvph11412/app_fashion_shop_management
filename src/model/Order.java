@@ -9,12 +9,31 @@ public class Order {
     private String status;
     private int amount;
     private String itemId;
+    private float price;
 
     public Order(int orderID, String customerName, ArrayList<Item> listItem) {
         this.orderID = orderID;
         this.customerName = customerName;
         this.listItem = listItem;
     }
+
+
+    public Order(String name, String id, int amount, float price, String status) {
+        this.customerName = name;
+        this.itemId = id;
+        this.amount = amount;
+        this.price = price;
+        this.status = status;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
 
     public String getStatus() {
         return status;
@@ -40,7 +59,9 @@ public class Order {
         this.itemId = itemId;
     }
 
+
     public Order(String customerName,  int amount,String status) {
+
         this.customerName = customerName;
         this.amount = amount;
         this.status = status;

@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet(name = "ItemAdminServlet", urlPatterns = "/item-update")
 public class ItemAdminServlet extends HttpServlet {
+    ItemService itemService = new ItemService();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         System.out.println(action);
-        if (action == null){
+        if (action == null) {
             action = "";
         }
         switch (action) {
@@ -28,18 +30,40 @@ public class ItemAdminServlet extends HttpServlet {
                 editItem(request, response);
                 break;
             case "add":
-                addItem(request, response);
+                try {
+                    addItem(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
-            default: showListItem(request, response);
+            default:
+                try {
+                    showListItem(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
         }
     }
 
-    private void showListItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showListItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        ResultSet items = itemService.getListItem();
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
         request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+
     }
 
-    private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ItemService itemService = new ItemService();
+    private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String itemID = request.getParameter("itemID");
         String itemName = request.getParameter("itemName");
         String itemImage = request.getParameter("itemImage");
@@ -51,14 +75,16 @@ public class ItemAdminServlet extends HttpServlet {
         boolean isSaved = itemService.saveDataItem(item);
         if (isSaved) {
             request.setAttribute("message", "save successfully");
+            showListItem(request, response);
         } else {
             request.setAttribute("message", "save not successfully");
+            showListItem(request, response);
         }
-        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+
+      //  request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
     }
 
     private void editItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ItemService itemService = new ItemService();
         String itemID = request.getParameter("itemID");
         String itemName = request.getParameter("itemName");
         String itemImage = request.getParameter("itemImage");
@@ -77,7 +103,6 @@ public class ItemAdminServlet extends HttpServlet {
     }
 
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ItemService itemService = new ItemService();
         String itemID = request.getParameter("itemID");
         boolean isDeleted = itemService.deleteItemByID(itemID);
         if (isDeleted) {
@@ -89,6 +114,163 @@ public class ItemAdminServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "search":
+                try {
+                    searchItem(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            default:
+                try {
+                    showListItem(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+        }
 
+    }
+
+    private void searchItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        String category = request.getParameter("category");
+        String price = request.getParameter("price");
+        if (category.equals("all") && price.equals("null")) {
+            showListItem(request, response);
+        } else if (category.equals("all") && price.equals("low")) {
+
+        } else if (category.equals("all") && price.equals("medium")) {
+
+        } else if (category.equals("all") && price.equals("hight")) {
+
+        } else if (category.equals("clothes") && price.equals("null")) {
+
+        } else if (category.equals("clothes") && price.equals("low")) {
+            showListClothesLowPrice(request, response);
+        } else if (category.equals("clothes") && price.equals("medium")) {
+            showListClothesMediumPrice(request, response);
+        } else if (category.equals("clothes") && price.equals("hight")) {
+            showListClothesHightPrice(request, response);
+        } else if (category.equals("shoes") && price.equals("null")) {
+
+        } else if (category.equals("shoes") && price.equals("low")) {
+            showListShoesLowPrice(request, response);
+        } else if (category.equals("shoes") && price.equals("medium")) {
+            showListShoesMediumPrice(request, response);
+        } else if (category.equals("shoes") && price.equals("hight")) {
+            showListShoesHightPrice(request, response);
+        } else if (category.equals("perfume") && price.equals("null")) {
+
+        } else if (category.equals("perfume") && price.equals("low")) {
+
+        } else if (category.equals("perfume") && price.equals("medium")) {
+
+        } else if (category.equals("perfume") && price.equals("hight")) {
+
+        }
+
+    }
+
+    private void showListClothesLowPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("clothes", 0, 20);
+
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+    private void showListClothesMediumPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("clothes", 20, 50);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+    private void showListClothesHightPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("clothes", 50, 1000);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+    private void showListShoesLowPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+
+        ResultSet items = itemService.getListItemByCategoryAndPrice("shoes", 0, 20);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+    private void showListShoesMediumPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("shoes", 20, 50);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+    private void showListShoesHightPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("shoes", 50, 1000);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
     }
 }

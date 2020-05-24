@@ -36,6 +36,15 @@ public class ItemService  implements IItemService {
                 "set itemId = '"+ item.getItemID() +"', item_name = '"+ item.getItemName() +"' , image = '"+ item.getItemImage() +"' , price = "+ item.getItemPrice() +", amount = "+ item.getItemAmount() +", catelory = '"+ item.getItemCategory() +"', describes = '"+ item.getItemDescribe() +"' " +
                 " where itemId = '"+ id +"';");
     }
+
+    @Override
+    public ResultSet getListItemByCategoryAndPrice(String category, float minPrice, float maxPrice) {
+        return dal.getData("select * from item where catelory = '"+ category +"' and price >= "+ minPrice +" and price < "+ maxPrice +";");
+    }
+
+    public ResultSet getListItemByCategory(String category) {
+        return dal.getData("select * from item where catelory = '"+ category +"' ;");
+    }
 }
 
 

@@ -17,4 +17,6 @@ public interface IOrderService {
     boolean deleteOder(String customerName, String itemId) throws SQLException;
 
     List<Order> search(String name) throws SQLException;
+
+    Boolean changeAmount(String name, String id, int amount) throws SQLException;
 }
