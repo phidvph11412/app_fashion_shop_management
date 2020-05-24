@@ -82,7 +82,7 @@
                     <td><c:out value="${oder.getCustomerName()}"/></td>
                     <td><c:out value="${oder.getItemId()}"/></td>
                     <td><c:out value="${oder.getAmount()}"/></td>
-                    <td><c:out value="${oder.isStatus()}"/></td>
+                    <td><c:out value="${oder.getStatus()}"/></td>
                     <td>
                         <a href="/order-update?action=edit&name=${oder.customerName}&item=${oder.itemId}"> Edit</a>
                         <br>

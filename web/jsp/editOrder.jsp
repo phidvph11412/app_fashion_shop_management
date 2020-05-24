@@ -50,7 +50,7 @@
             </div>
             <div class="form-group input-form ">
                 <label>ItemId :</label>
-                <input type="text" name="itemId"  value="${orders.getItemId()}" class="form-control ">
+                <input type="text" name="itemId" value="${orders.getItemId()}" class="form-control ">
             </div>
             <div class="form-group input-form ">
                 <label>Amount : </label>
@@ -58,18 +58,24 @@
             </div>
             <div class="form-group input-form ">
                 <label>Status :</label>
-                <input type="text" name="status"value="${orders.isStatus() }" class="form-control ">
+                <select name="status">
+                    <option value="NoProcess">NoProcess</option>
+                    <option value="Process">Process</option>
+                    <option  value="Processed">Processed</option>
+                </select>
+                <%--                <input type="text" name="status" value="${orders.getStatus() }" class="form-control ">--%>
             </div>
             <center style="margin-top: 50px">
                 <button style="width: 100px" class="btn btn-primary "
                         type="submit" name="action" value="edit">Edit
                 </button>
-                <button  style="width: 100px" class="btn btn-primary"><a href="/order-update" style="color: yellow ;" >Back</a></button>
+                <button style="width: 100px" class="btn btn-primary"><a href="/order-update" style="color: yellow ;">Back</a>
+                </button>
             </center>
             <br>
-           <center style="margin-top: 50px;color: brown">
-               <h1> <span >${title}</span></h1>
-           </center>
+            <center style="margin-top: 50px;color: brown">
+                <h1><span>${title}</span></h1>
+            </center>
         </form>
     </main>
 
