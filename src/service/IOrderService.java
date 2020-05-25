@@ -19,4 +19,6 @@ public interface IOrderService {
     List<Order> search(String name) throws SQLException;
 
     Boolean changeAmount(String name, String id, int amount) throws SQLException;
+    public List<Order> getListOrdersByStatus(String status) throws SQLException;
+
 }

@@ -103,25 +103,19 @@
             Edit your About page from the Pages tab by clicking the edit button.</b>
     </div>
     <hr>
-   <h2 style="margin: auto;margin-left: 550px">CATEGORY</h2>
+    <h2 style="margin: auto;margin-left: 650px">CATEGORY</h2>
     <div class="row">
         <div class="col-xl-2"></div>
         <div class="col-xl-3"><a href="/home?action=clothes"><img src="img/image2.jpg" alt="" width="300px" height="200px"></a></div>
         <div class="col-xl-3"><a href="/home?action=shoes"><img src="img/shoes1.jpg" alt="" width="300px" height="200px"></a></div>
         <div class="col-xl-3"><a href="/home?action=perfume"><img src="img/perfume4.jpg" alt="" width="300px" height="200px"></a></div>
         <div class="col-xl-2"></div>
-
     </div>
     <div class="title-content"><h2>NEW CLOTHES</h2></div>
     <div class="row content">
         <% ItemService itemService = new ItemService();
-            ResultSet items = itemService.getListItem();
-            int count = -1; %>
-        <% while (items.next()) {
-            count++;
-            if (count == 12)
-                break; %>
-
+            ResultSet items = itemService.getListItem();%>
+        <% while (items.next()) {%>
         <div class="col-xl-2 col-lg-3 col-md-6 col-12">
             <form action="/home" method="post">
                 <div class="card" style="width: 16rem;">
@@ -142,14 +136,9 @@
             </form>
         </div>
         <%}%>
-
-
     </div>
     <div><a href="/home?action=1"> 1 </a> <a href="/home?action=2"> 2 </a></div>
-
     <hr>
-
-
     <div class="contact" id="footer-contact">
         <h2>CONTACT</h2>
         <div class="contact-content row">
@@ -183,7 +172,6 @@
             <p>Copyrigh 2020 All rights reserved - phi dao <br> Powered By SITE123-Website creator</p>
         </div>
     </div>
-
 </div>
 
 
