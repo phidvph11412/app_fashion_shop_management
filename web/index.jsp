@@ -34,7 +34,7 @@
 
     <header class="header row">
         <div class="col-xl-4 logo">
-            <h1><a href="index.jsp">LOGO</a></h1>
+            <h1><a href="index.jsp">LucyShop</a></h1>
         </div>
         <div class="col-xl-4"><span class="user-name"
                                     style="line-height: 90px;color: #eb6d6c">${name}</span></div>
@@ -89,7 +89,7 @@
         <div><img width="1150px" height="170px"
                   src="https://2.bp.blogspot.com/--DLlnIxlfYM/VmKw9ScsdyI/AAAAAAAAADY/-9lNdSVvQYU/s1600-r/fashion-banner-5.gif"
                   alt=""></div>
-        <p>The About page is the core description of your website.
+        <b>The About page is the core description of your website.
             Here is where you let clients know what your website is about.
             You can edit all of this text and replace it with what you want to write.
             For example you can let them know how long you have been in business,
@@ -100,10 +100,10 @@
             description of your website. Here is where you let clients know what your website is about. You can edit all
             of this text and replace it with what you want to write. For example you can let them know how long you have
             been in business, what makes your company special, what are its core values and more.
-            Edit your About page from the Pages tab by clicking the edit button.</p>
+            Edit your About page from the Pages tab by clicking the edit button.</b>
     </div>
     <hr>
-    <div><h2>CATEGORY</h2></div>
+   <h2 style="margin: auto;margin-left: 550px">CATEGORY</h2>
     <div class="row">
         <div class="col-xl-2"></div>
         <div class="col-xl-3"><a href="/home?action=clothes"><img src="img/image2.jpg" alt="" width="300px" height="200px"></a></div>
