@@ -64,6 +64,14 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" name="action" value="find" type="submit">Search
                 </button>
             </form>
+            <form action="/order-update" method="post">
+                <select name="Status">
+                    <option value="NoProcess">NoProcess</option>
+                    <option value="Process">Process</option>
+                    <option value="Processed">Processed</option>
+                </select>
+                <button name="action" value="findStatus">Search</button>
+            </form>
         </nav>
         <div class="container text-left">
             <a href="/Customers?action=showRegister" class="btn btn-success">Add New Oder</a>
@@ -94,7 +102,6 @@
                 </tr>
             </c:forEach>
             </tbody>
-
         </table>
     </div>
 </div>
