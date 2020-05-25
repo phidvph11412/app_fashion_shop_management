@@ -11,13 +11,14 @@ public class OrderService implements IOrderService {
     DAL dal;
     private String url = "jdbc:mysql://localhost:3306/lucy_shop";
     private String user = "root";
-    private String pass = "";
+    private String pass = "password";
     private static final String SELECT_ODER = "select customerName  ,itemId ,amount ,status  from orders";
     private static final String UPDATE_ORDER = "update orders set  amount = ?  ,status = ? where customerName = ?  and itemId = ?";
     private static final String SELECT_ODER_NAME = "select customerName , itemId , amount,status from orders where customerName = ? and itemId = ?";
     private static final String DELETE_ODER = "delete from orders where customerName = ? and itemId =? ";
     private static final String GET_ORDER_BY_NAME = "select * from orders where customerName = ?";
     private static final String UPDATE_AMOUNT = "update orders set amount = ? where customerName = ?  and itemId = ? ";
+    private static final String SELECT_ORDER_BY_CATEGORY = "select customerName  ,itemId ,amount ,status  from orders where status = ?";
 
     public Connection getConnection() {
         Connection connection = null;
@@ -43,7 +44,7 @@ public class OrderService implements IOrderService {
         ArrayList<Item> listItem = order.getListItem();
         if (listItem.size() >= 1) {
             for (Item item : listItem) {
-                dal.updateData("insert into orders(customerName, itemId, amount, price) " +
+               return dal.updateData("insert into orders(customerName, itemId, amount, price) " +
                         "values('" + order.getCustomerName() + "','" + item.getItemID() + "', " + item.getItemAmount() + ", " + item.getItemAmount() * item.getItemPrice() + ");");
             }
             return true;
@@ -51,7 +52,21 @@ public class OrderService implements IOrderService {
             return false;
         }
     }
-
+    public List<Order> getListOrdersByStatus(String status) throws SQLException {
+        List<Order> orderList = new ArrayList<>();
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_BY_CATEGORY);
+        preparedStatement.setString(1, status);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String customerName = resultSet.getString("customerName");
+            String itemId = resultSet.getString("itemId");
+            int amount = resultSet.getInt("amount");
+            String status1 = resultSet.getString("status");
+            orderList.add(new Order(customerName, itemId, amount, status1));
+        }
+        return orderList;
+    }
 
     @Override
     public boolean updateOrder(Order order) throws SQLException {

@@ -9,7 +9,7 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
     private String url = "jdbc:mysql://localhost:3306/lucy_shop";
     private String user = "root";
-    private String pass = "";
+    private String pass = "password";
     private static final String SELECT_ALL_CUSTOMER = "select * from customer";
     private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer (customerName,customerPass,Phone,Email,Address) VALUES (?, ?, ?,?,?);";
     private static final String DELETE_Customer_SQL = "delete from customer where customerName = ?;";

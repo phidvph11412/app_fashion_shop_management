@@ -65,7 +65,7 @@
                 </button>
             </form>
             <form action="/order-update" method="post">
-                <select name="Status">
+                <select name="status">
                     <option value="NoProcess">NoProcess</option>
                     <option value="Process">Process</option>
                     <option value="Processed">Processed</option>

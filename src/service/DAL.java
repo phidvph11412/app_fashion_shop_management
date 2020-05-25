@@ -9,7 +9,7 @@ public class DAL {
     public DAL() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lucy_shop", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lucy_shop", "root", "password");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

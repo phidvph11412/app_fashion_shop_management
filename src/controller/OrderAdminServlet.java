@@ -40,7 +40,23 @@ public class OrderAdminServlet extends HttpServlet {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+                break;
+            case "findStatus" :
+                try {
+                    searchOrdersByStatus(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
         }
+    }
+
+    private void searchOrdersByStatus(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        OrderService orderService = new OrderService();
+        String status = request.getParameter("status");
+       List<Order> listOrder = orderService.getListOrdersByStatus(status);
+        request.setAttribute("orderList", listOrder);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("jsp/listOder.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

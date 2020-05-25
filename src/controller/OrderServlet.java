@@ -65,7 +65,7 @@ public class OrderServlet extends HttpServlet {
        }else {
            session.removeAttribute("newOrder");
            request.setAttribute("oldOrderList", oldOrder);
-           request.setAttribute("message", "khong thanh cong!!");
+           request.setAttribute("message", "da them vao gio hang va da co san pham bi trung!!");
            request.getRequestDispatcher("jsp/order.jsp").forward(request, response);
        }
 
