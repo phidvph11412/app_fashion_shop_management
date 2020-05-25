@@ -17,7 +17,7 @@
 <div class="container">
     <header class="header row">
         <div class="col-xl-6 logo">
-            <h1><a href="/index.jsp">LOGO</a></h1>
+            <h1><a href="/index.jsp">LucyShop</a></h1>
         </div>
         <div class="col-xl-6 menu">
             <ul class="nav">

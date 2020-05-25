@@ -11,14 +11,13 @@ public class OrderService implements IOrderService {
     DAL dal;
     private String url = "jdbc:mysql://localhost:3306/lucy_shop";
     private String user = "root";
-    private String pass = "password";
+    private String pass = "";
     private static final String SELECT_ODER = "select customerName  ,itemId ,amount ,status  from orders";
     private static final String UPDATE_ORDER = "update orders set  amount = ?  ,status = ? where customerName = ?  and itemId = ?";
     private static final String SELECT_ODER_NAME = "select customerName , itemId , amount,status from orders where customerName = ? and itemId = ?";
     private static final String DELETE_ODER = "delete from orders where customerName = ? and itemId =? ";
-    private static final String GET_ORDER_BY_ID = "select * from orders where customerName = ?";
+    private static final String GET_ORDER_BY_NAME = "select * from orders where customerName = ?";
     private static final String UPDATE_AMOUNT = "update orders set amount = ? where customerName = ?  and itemId = ? ";
-    private static final String SELECT_ODER_STATUS = "select customerName  ,itemId ,amount ,status  from orders where status = ? ";
 
     public Connection getConnection() {
         Connection connection = null;
@@ -121,7 +120,7 @@ public class OrderService implements IOrderService {
     public ArrayList<Order> getListOrderByName(String customerName) throws SQLException {
         ArrayList<Order> listOrder = new ArrayList<>();
         Connection connection = getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_ID);
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_NAME);
         preparedStatement.setString(1, customerName);
         ResultSet orders = preparedStatement.executeQuery();
         while (orders.next()) {
