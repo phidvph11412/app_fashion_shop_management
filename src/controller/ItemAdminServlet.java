@@ -28,6 +28,11 @@ public class ItemAdminServlet extends HttpServlet {
                 break;
             case "edit":
                 editItem(request, response);
+                try {
+                    showListItem(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
             case "add":
                 try {
@@ -81,7 +86,6 @@ public class ItemAdminServlet extends HttpServlet {
             showListItem(request, response);
         }
 
-      //  request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
     }
 
     private void editItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,18 +103,16 @@ public class ItemAdminServlet extends HttpServlet {
         } else {
             request.setAttribute("message", "edit not successfully");
         }
-        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
     }
 
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String itemID = request.getParameter("itemID");
+        String itemID = request.getParameter("item");
         boolean isDeleted = itemService.deleteItemByID(itemID);
         if (isDeleted) {
             request.setAttribute("message", "delete successfully");
         } else {
             request.setAttribute("message", "delete not successfully . item already exists in shopping cart");
         }
-        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -125,6 +127,17 @@ public class ItemAdminServlet extends HttpServlet {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+                break;
+            case "delete":
+                deleteItem(request, response);
+                try {
+                    showListItem(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "edit":
+                editItem(request, response);
                 break;
             default:
                 try {
