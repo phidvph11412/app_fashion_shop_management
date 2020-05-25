@@ -59,7 +59,7 @@
         <form action="/item-update" method="post">
             <input type="text" name="itemID" placeholder="ID" style="width: 100px">
             <input type="text" name="itemName" placeholder="Name">
-            <input type="file" name="itemImage" >
+            <input type="file" name="itemImage">
             <input type="text" name="itemPrice" placeholder="Price" style="width: 100px">
             <input type="text" name="itemAmount" placeholder="Amount" style="width: 100px">
             <select name="itemCategory" id="item-category">
@@ -68,7 +68,8 @@
                 <option value="perfume">perfume</option>
             </select>
             <input type="text" name="itemDescribe" placeholder="Describe">
-            <button  type="submit" class="btn btn-primary" name="action" value="add">ADD</button>
+            <button type="submit" class="btn btn-primary" name="action" value="add">ADD</button>
+            <button type="submit" class="btn btn-primary" name="action" value="edit">EDIT</button>
         </form>
     </div>
     <div>
@@ -117,9 +118,8 @@
                     <td><c:out value="${item.getItemCategory()}"/></td>
                     <td><c:out value="${item.getItemDescribe()}"/></td>
                     <td>
-                        <a href="/item-update?action=edit&name=${oder.customerName}&item=${oder.itemId}"> Edit</a>
                         <br>
-                        <a href="/item-update?action=delete&name=${oder.customerName}&item=${oder.itemId}"> Delete </a>
+                        <a href="/item-update?action=delete&item=${item.getItemID()}"> Delete </a>
                     </td>
                 </tr>
             </c:forEach>
