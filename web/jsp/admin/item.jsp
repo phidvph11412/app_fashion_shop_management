@@ -93,74 +93,7 @@
     </div>
 
     <div class="content ">
-        <%--        <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-6 row">--%>
-        <%--            <% ItemService dbItem = new ItemService();--%>
-        <%--                ResultSet listItem = dbItem.getListItem();%>--%>
-        <%--            <% while (listItem.next()) {%>--%>
-        <%--            <div class="col-xl-3 col-lg-4 col-md-6 col-12">--%>
-        <%--                <form action="/item-update" method="post">--%>
-        <%--                    <div class="card" style="width: 16rem;">--%>
-        <%--                        <img src="../../img/<%=listItem.getString(3)%>" class="card-img-top" width="15rem"; height="200px" alt="">--%>
-        <%--                        <div class="card-body">--%>
-        <%--                            <input type="file" name="itemImage"/>--%>
-        <%--                            Item ID : <input type="text" name="itemID" value="<%=listItem.getString(1)%>"--%>
-        <%--                                             class="card-title"/>--%>
-        <%--                            Item Name : <input type="text" name="itemName" value="<%=listItem.getString(2)%>"--%>
-        <%--                                               class="card-title"/>--%>
-        <%--                            Item Price : <input type="text" name="itemPrice" value="<%=listItem.getString(4)%>"--%>
-        <%--                                                class="card-title"/>--%>
-        <%--                            Item Amount : <input type="text" name="itemAmount" value="<%=listItem.getString(5)%>"--%>
-        <%--                                                 class="card-title"/>--%>
-        <%--                            Item Category : <input type="text" name="itemCategory" value="<%=listItem.getString(6)%>"--%>
-        <%--                                                   class="card-title"/>--%>
-        <%--                            Item Describes : <input type="text" name="itemDescribe" value="<%=listItem.getString(7)%>"--%>
-        <%--                                                    class="card-title"/>--%>
-        <%--                            <button type="submit" name="action" value="delete" class="btn btn-primary">Delete</button>--%>
-        <%--                            <button type="submit" name="action" value="edit" class="btn btn-primary">Edit</button>--%>
-        <%--                        </div>--%>
-        <%--                    </div>--%>
-        <%--                </form>--%>
-        <%--            </div>--%>
-        <%--            <%}%>--%>
 
-        <%--        </div>--%>
-        <%--        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-6">--%>
-        <%--            <form action="/item-update" method="post">--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-id">Item ID</label>--%>
-        <%--                    <input type="text" name="itemID" class="form-control" id="item-id">--%>
-        <%--                </div>--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-name">Item Name</label>--%>
-        <%--                    <input type="text" name="itemName" class="form-control" id="item-name">--%>
-        <%--                </div>--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-image">Item Image</label>--%>
-        <%--                    <input type="file" name="itemImage" class="form-control" id="item-image">--%>
-        <%--                </div>--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-price">Item Price</label>--%>
-        <%--                    <input type="text" name="itemPrice" class="form-control" id="item-price">--%>
-        <%--                </div>--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-amount">Item Amount</label>--%>
-        <%--                    <input type="text" name="itemAmount" class="form-control" id="item-amount">--%>
-        <%--                </div>--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-category">Item Category</label>--%>
-        <%--                    <select name="itemCategory" id="item-category">--%>
-        <%--                        <option value="clothes">clothes</option>--%>
-        <%--                        <option value="shoes">shoes</option>--%>
-        <%--                        <option value="perfume">perfume</option>--%>
-        <%--                    </select>--%>
-        <%--                </div>--%>
-        <%--                <div class="form-group">--%>
-        <%--                    <label for="item-describe">Item Describes</label>--%>
-        <%--                    <textarea name="itemDescribe" id="item-describe" class="form-control" cols="36" rows="3"></textarea>--%>
-        <%--                </div>--%>
-        <%--                <button type="submit" class="btn btn-primary" name="action" value="add">Add Item</button>--%>
-        <%--            </form>--%>
-        <%--        </div>--%>
         <table class="table table-success table-hover">
             <thead>
             <tr>

@@ -21,11 +21,11 @@ import java.util.ArrayList;
 public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
-            case "add-to-cart" :
+        switch (action) {
+            case "add-to-cart":
                 try {
                     addItemToCart(request, response);
                 } catch (SQLException throwables) {
@@ -123,9 +123,31 @@ public class HomeServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
-            case "logout": deleteSession(request, response);
-               break;
-            case "cart" :
+            case "logout":
+                deleteSession(request, response);
+                break;
+            case "clothes":
+                try {
+                    showListClothes(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "shoes":
+                try {
+                    showListShoes(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "perfume":
+                try {
+                    showListPerfume(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "cart":
                 try {
                     showCartByName(request, response);
                 } catch (SQLException throwables) {
@@ -134,12 +156,72 @@ public class HomeServlet extends HttpServlet {
         }
     }
 
+    private void showListShoes(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String category = request.getParameter("action");
+        ItemService itemService = new ItemService();
+        ResultSet listItem = itemService.getListItemByCategory(category);
+        ArrayList<Item> listClothes = new ArrayList<>();
+        while (listItem.next()) {
+            String id = listItem.getString(1);
+            String name = listItem.getString(2);
+            String image = listItem.getString(3);
+            float price = listItem.getFloat(4);
+            int amount = listItem.getInt(5);
+            String category1 = listItem.getString(6);
+            String describe = listItem.getString(7);
+            listClothes.add(new Item(id, name, image, price, amount, category1, describe));
+
+        }
+        request.setAttribute("itemList", listClothes);
+        request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+    }
+
+    private void showListPerfume(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String category = request.getParameter("action");
+        ItemService itemService = new ItemService();
+        ResultSet listItem = itemService.getListItemByCategory(category);
+        ArrayList<Item> listClothes = new ArrayList<>();
+        while (listItem.next()) {
+            String id = listItem.getString(1);
+            String name = listItem.getString(2);
+            String image = listItem.getString(3);
+            float price = listItem.getFloat(4);
+            int amount = listItem.getInt(5);
+            String category1 = listItem.getString(6);
+            String describe = listItem.getString(7);
+            listClothes.add(new Item(id, name, image, price, amount, category1, describe));
+
+        }
+        request.setAttribute("itemList", listClothes);
+        request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+    }
+
+    private void showListClothes(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String category = request.getParameter("action");
+        ItemService itemService = new ItemService();
+        ResultSet listItem = itemService.getListItemByCategory(category);
+        ArrayList<Item> listClothes = new ArrayList<>();
+        while (listItem.next()) {
+            String id = listItem.getString(1);
+            String name = listItem.getString(2);
+            String image = listItem.getString(3);
+            float price = listItem.getFloat(4);
+            int amount = listItem.getInt(5);
+            String category1 = listItem.getString(6);
+            String describe = listItem.getString(7);
+            listClothes.add(new Item(id, name, image, price, amount, category1, describe));
+
+        }
+        request.setAttribute("itemList", listClothes);
+        request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+    }
+
     private void showCartByName(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         HttpSession session = request.getSession();
         String name = (String) session.getAttribute("name");
-        if (name == null){
+        if (name == null) {
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
-        }else {
+        } else {
             // show old order and new order if exist
             OrderService orderService = new OrderService();
             ArrayList<Order> listOrder = orderService.getListOrderByName(name);

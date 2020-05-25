@@ -102,6 +102,15 @@
             Edit your About page from the Pages tab by clicking the edit button.</p>
     </div>
     <hr>
+    <div><h2>CATEGORY</h2></div>
+    <div class="row">
+        <div class="col-xl-2"></div>
+        <div class="col-xl-3"><a href="/home?action=clothes"><img src="img/image2.jpg" alt="" width="300px" height="200px"></a></div>
+        <div class="col-xl-3"><a href="/home?action=shoes"><img src="img/shoes1.jpg" alt="" width="300px" height="200px"></a></div>
+        <div class="col-xl-3"><a href="/home?action=perfume"><img src="img/perfume4.jpg" alt="" width="300px" height="200px"></a></div>
+        <div class="col-xl-2"></div>
+
+    </div>
     <div class="title-content"><h2>NEW CLOTHES</h2></div>
     <div class="row content">
 
@@ -128,7 +137,7 @@
         </c:forEach>
 
     </div>
-    <div><a href="/home?list=1"> 1 </a> <a href="/home?list=2"> 2 </a></div>
+    <div><a href="/home?action=1"> 1 </a> <a href="/home?action=2"> 2 </a></div>
 
     <hr>
 

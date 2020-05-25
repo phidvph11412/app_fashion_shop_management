@@ -142,13 +142,13 @@ public class ItemAdminServlet extends HttpServlet {
         if (category.equals("all") && price.equals("null")) {
             showListItem(request, response);
         } else if (category.equals("all") && price.equals("low")) {
-
+            showListItemLowPrice(request, response);
         } else if (category.equals("all") && price.equals("medium")) {
-
+            showListItemMediumPrice(request, response);
         } else if (category.equals("all") && price.equals("hight")) {
-
+            showListItemHightPrice(request,response);
         } else if (category.equals("clothes") && price.equals("null")) {
-
+            showListClothes(request, response);
         } else if (category.equals("clothes") && price.equals("low")) {
             showListClothesLowPrice(request, response);
         } else if (category.equals("clothes") && price.equals("medium")) {
@@ -156,7 +156,7 @@ public class ItemAdminServlet extends HttpServlet {
         } else if (category.equals("clothes") && price.equals("hight")) {
             showListClothesHightPrice(request, response);
         } else if (category.equals("shoes") && price.equals("null")) {
-
+            showListShoes(request, response);
         } else if (category.equals("shoes") && price.equals("low")) {
             showListShoesLowPrice(request, response);
         } else if (category.equals("shoes") && price.equals("medium")) {
@@ -164,20 +164,172 @@ public class ItemAdminServlet extends HttpServlet {
         } else if (category.equals("shoes") && price.equals("hight")) {
             showListShoesHightPrice(request, response);
         } else if (category.equals("perfume") && price.equals("null")) {
-
+            showListPerfume(request, response);
         } else if (category.equals("perfume") && price.equals("low")) {
-
+            showListPerfumeLowtPrice(request, response);
         } else if (category.equals("perfume") && price.equals("medium")) {
-
+            showListPerfumeMediumPrice(request, response);
         } else if (category.equals("perfume") && price.equals("hight")) {
-
+            showListPerfumeHightPrice(request, response);
         }
 
     }
 
+    private void showListItemHightPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByPrice(50, 1000);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListItemMediumPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByPrice(20, 50);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListItemLowPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByPrice(0, 20);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListPerfume(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategory("perfume");
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListShoes(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategory("shoes");
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListClothes(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategory("clothes");
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListPerfumeLowtPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("perfume", 0, 20);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListPerfumeMediumPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("perfume", 20, 50);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
+    private void showListPerfumeHightPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        ResultSet items = itemService.getListItemByCategoryAndPrice("perfume", 50, 1000);
+        ArrayList<Item> listItems = new ArrayList<>();
+        while (items.next()) {
+            String itemId = items.getString(1);
+            String name = items.getString(2);
+            String img = items.getString(3);
+            float price1 = items.getFloat(4);
+            int amount = items.getInt(5);
+            String cate = items.getString(6);
+            String describe = items.getString(7);
+            listItems.add(new Item(itemId, name, img, price1, amount, cate, describe));
+        }
+        request.setAttribute("items", listItems);
+        request.getRequestDispatcher("jsp/admin/item.jsp").forward(request, response);
+    }
+
     private void showListClothesLowPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         ResultSet items = itemService.getListItemByCategoryAndPrice("clothes", 0, 20);
-
         ArrayList<Item> listItems = new ArrayList<>();
         while (items.next()) {
             String itemId = items.getString(1);

@@ -45,6 +45,9 @@ public class ItemService  implements IItemService {
     public ResultSet getListItemByCategory(String category) {
         return dal.getData("select * from item where catelory = '"+ category +"' ;");
     }
+    public ResultSet getListItemByPrice(float minPrice , float maxPrice) {
+        return dal.getData("select * from item where price >= "+ minPrice +" and price < "+ maxPrice +" ;");
+    }
 }
 
 
