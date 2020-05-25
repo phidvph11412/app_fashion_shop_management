@@ -36,6 +36,9 @@
         </div>
     </header>
     <main class="content">
+        <center style="margin-top: 50px;color: brown">
+            <h3>${register}</h3>
+        </center>
         <form method="post" action="/Customers" class="form-group form">
             <h2 class="text-primary ">Register</h2>
             <div class="form-group input-form ">
@@ -62,9 +65,11 @@
                 <label>Address :</label>
                 <input value="${customers.getCustomerAddress()}" placeholder="trungtrac-vanlam-hungyen" type="text" name="address" rows="3"  class="form-control " >
             </div>
-            <button class="btn btn-primary btn-form-submit "
-                    type="submit" name="action" value="create">register
-            </button>
+            <center style="margin-top: 50px">
+                <button style="width: 100%" class="btn btn-primary "
+                        type="submit" name="action" value="create">Register
+                </button>
+            </center>
         </form>
     </main>
 

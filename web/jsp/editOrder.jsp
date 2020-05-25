@@ -65,11 +65,12 @@
                 </button>
                 <button style="width: 100px"  class="btn btn-primary"><a href="/order-update" style="color: yellow ;">Back</a>
                 </button>
-                <h3>${message}</h3>
             </center>
             <br>
-            <center style="margin-top: 50px;color: brown">
+            <center style="margin-top: 40px;color: brown">
                 <h1><span>${title}</span></h1>
+                <h3>${order1}</h3>
+                <h3>${message}</h3>
             </center>
         </form>
     </main>

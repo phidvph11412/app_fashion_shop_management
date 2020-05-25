@@ -53,10 +53,6 @@
                             <a class="nav-link" href="/order-update">LIST ORDER <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
                 </nav>
             </div>
         </header>
@@ -70,7 +66,9 @@
             <a href="/Customers?action=showRegister" class="btn btn-success">Add New Customer</a>
         </div>
         <br>
-
+        <center style="color: red">
+            <h3>${customer}</h3>
+        </center>
         <table class="table table-success table-hover">
             <thead>
             <tr>

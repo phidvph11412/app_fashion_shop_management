@@ -18,8 +18,7 @@ public class OrderService implements IOrderService {
     private static final String DELETE_ODER = "delete from orders where customerName = ? and itemId =? ";
     private static final String GET_ORDER_BY_ID = "select * from orders where customerName = ?";
     private static final String UPDATE_AMOUNT = "update orders set amount = ? where customerName = ?  and itemId = ? ";
-
-
+    private static final String SELECT_ODER_STATUS = "select customerName  ,itemId ,amount ,status  from orders where status = ? ";
 
     public Connection getConnection() {
         Connection connection = null;
@@ -39,7 +38,7 @@ public class OrderService implements IOrderService {
     }
 
     public boolean saveOrder(Order order) {
-        if (order == null){
+        if (order == null) {
             return false;
         }
         ArrayList<Item> listItem = order.getListItem();
@@ -157,7 +156,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Boolean changeAmount(String name, String id , int amount) throws SQLException {
+    public Boolean changeAmount(String name, String id, int amount) throws SQLException {
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AMOUNT);
         preparedStatement.setInt(1, amount);
@@ -165,6 +164,7 @@ public class OrderService implements IOrderService {
         preparedStatement.setString(3, id);
         return preparedStatement.executeUpdate() > 0 ? true : false;
     }
+
 
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
