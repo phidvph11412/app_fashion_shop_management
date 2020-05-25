@@ -141,9 +141,11 @@ public class RegisterServlet extends HttpServlet {
             Customer customer = new Customer(name, pass, phone, email, address);
             customerService.insertCustomers(customer);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/register.jsp");
+            request.setAttribute("register","Register Success");
             requestDispatcher.forward(request, response);
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/Error.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/register.jsp");
+            request.setAttribute("register","Register No Success");
             requestDispatcher.forward(request, response);
         }
     }
@@ -165,11 +167,20 @@ public class RegisterServlet extends HttpServlet {
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         String customerName = request.getParameter("name");
-        customerService.deleteCustomer(customerName);
-        List<Customer> listCustomer = customerService.selectAllCustomer();
-        request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/register.jsp");
-        dispatcher.forward(request, response);
+        boolean isDeletes = customerService.deleteCustomer(customerName);
+        if (isDeletes){
+            List<Customer> listCustomer = customerService.selectAllCustomer();
+            request.setAttribute("customerList", listCustomer);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/admin/listCustomer.jsp");
+            request.setAttribute("customer","Delete Success");
+            dispatcher.forward(request, response);
+        }else {
+            List<Customer> listCustomer = customerService.selectAllCustomer();
+            request.setAttribute("customerList", listCustomer);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/admin/listCustomer.jsp");
+            request.setAttribute("customer","Delete No Success");
+            dispatcher.forward(request, response);
+        }
     }
 
     private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {

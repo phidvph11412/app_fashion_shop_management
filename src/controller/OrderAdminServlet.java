@@ -40,7 +40,6 @@ public class OrderAdminServlet extends HttpServlet {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                break;
         }
     }
 
@@ -93,7 +92,6 @@ public class OrderAdminServlet extends HttpServlet {
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
                         request.setAttribute("orders", order1);
                         requestDispatcher.forward(request, response);
-
                     } else {
                         request.setAttribute("message", "Edit no  success");
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
@@ -106,8 +104,7 @@ public class OrderAdminServlet extends HttpServlet {
                     request.setAttribute("orders", order);
                     requestDispatcher.forward(request, response);
                 }
-
-            }else {
+            } else {
                 request.setAttribute("message", "Edit no  success");
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
                 request.setAttribute("orders", order);
@@ -145,7 +142,7 @@ public class OrderAdminServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
             }
         } else if (order.getStatus().equals("Processed")) {
-            if (status.equals("Processed")) {
+            if (status.equals("Processed") || status.equals("Process")) {
                 if (validateItem.validateAmount(amount)) {
                     int amount1 = Integer.parseInt(amount);
                     Order order1 = new Order(name, item, amount1, status);
@@ -203,13 +200,21 @@ public class OrderAdminServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String name = request.getParameter("name");
         String item = request.getParameter("item");
-        orderService.deleteOder(name, item);
-        List<Order> orderList = new ArrayList<>();
-        request.setAttribute("order", orderList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
-        requestDispatcher.forward(request, response);
+        boolean isDelete = orderService.deleteOder(name, item);
+        if (isDelete) {
+            List<Order> orderList = new ArrayList<>();
+            request.setAttribute("order", orderList);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+            request.setAttribute("order1", "Delete Success");
+            requestDispatcher.forward(request, response);
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/editOrder.jsp");
+            request.setAttribute("order1", "Delete No Success");
+            requestDispatcher.forward(request, response);
+        }
     }
 }
