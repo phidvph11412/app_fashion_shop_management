@@ -28,7 +28,7 @@
                 <li class="border-bottom-red"><a href="../index.jsp">HOME</a></li>
                 <li><a href="../jsp/login.jsp">LOGIN</a></li>
                 <li><a href="../jsp/register.jsp">REGISTER</a></li>
-                <li><a href="../jsp/order.jsp">CART</a></li>
+                <li><a href="/home?action=cart">CART</a></li>
                 <li class="icon"><a href="https://www.facebook.com/fc.ngoclich"><span class="fa-stack ">
                   <i class="fa fa-circle-thin fa-stack-2x"></i>
                   <i class="fa fa-facebook fa-stack-1x"></i>
@@ -41,27 +41,20 @@
     </header>
     <div class="order-content row">
         <div class="list-item col-xl-9">
-            <table class="table table-hover table-borderless ">
+            <table class="table table-hover table-borderless " style="border: #252525 1px solid">
                 <c:forEach items="${oldOrderList}" var="oldOrder">
                     <tr>
                         <td><p>ID : ${oldOrder.getItemId()}</p></td>
                         <td><p>Price : ${oldOrder.getPrice()}</p></td>
-                        <td>SL :
-                            <button value="" name="action">-</button>
-                                ${oldOrder.getAmount()}
-                            <button>+</button>
-                        </td>
+                        <td>SL :  ${oldOrder.getAmount()}   </td>
                         <td>Thanh tien :${oldOrder.getAmount() * oldOrder.getPrice()} </td>
                         <td>Trang thai :${oldOrder.getStatus()} </td>
-                        <td>
-                            <button>Xoa</button>
-                        </td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
 
-        <div class="pay col-xl-3">
+        <div class="pay col-xl-3" style="border: #eb6d6c 1px solid">
             <form action="/buy" method="post">
                 <table>
                     <tr>
@@ -104,21 +97,22 @@
             </form>
             <span>${message}</span>
         </div>
-        <div class="cart">
-            <table class="table table-hover table-borderless ">
-                <c:forEach items="${newOrder.getListItem()}" var="item">
-                    <tr>
-                        <td>${item.getItemID()}</td>
-                        <td>${item.getItemName()}</td>
-                        <td>${item.getItemImage()}</td>
-                        <td>${item.getItemAmount()}</td>
-                        <td>${item.getItemPrice()}</td>
-                        <td>${item.getItemCategory()}</td>
-                        <td>${item.getItemDescribe()}</td>
-                    </tr>
-                </c:forEach>
-
-            </table>
+        <div class="cart ">
+            <div class=" ">
+                <table class="table table-hover table-borderless " style="border: chartreuse solid 1px" >
+                    <c:forEach items="${newOrder.getListItem()}" var="item">
+                        <tr>
+                            <td>${item.getItemID()}</td>
+                            <td>${item.getItemName()}</td>
+                            <td>${item.getItemImage()}</td>
+                            <td>${item.getItemAmount()}</td>
+                            <td>${item.getItemPrice()}</td>
+                            <td>${item.getItemCategory()}</td>
+                            <td>${item.getItemDescribe()}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
     </div>
 
