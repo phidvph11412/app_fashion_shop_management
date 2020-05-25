@@ -34,7 +34,7 @@
 
     <header class="header row">
         <div class="col-xl-4 logo">
-            <h1><a href="index.jsp">LOGO</a></h1>
+            <h1><a href="index.jsp">LucyShop</a></h1>
         </div>
         <div class="col-xl-4"><span class="user-name"
                                     style="line-height: 90px;color: #eb6d6c">${name}</span></div>
